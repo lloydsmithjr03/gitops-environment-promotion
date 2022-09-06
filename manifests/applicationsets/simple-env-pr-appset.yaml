@@ -14,7 +14,7 @@ spec:
       requeueAfterSeconds: 5
   template:
     metadata:
-      name: 'simple-deployment-{{branch}}-{{number}}'
+      name: 'simple-deployment-{{number}}-{{branch}}'
     spec:
       source:
         repoURL: 'https://github.com/lloydsmithjr03/gitops-environment-promotion'
@@ -29,4 +29,4 @@ spec:
           - CreateNamespace=true
       destination:
         server: https://kubernetes.default.svc
-        namespace: 'simple-deployment-{{branch}}-{{number}}'
+        namespace: 'simple-deployment-{{number}}-{{branch}}'
