@@ -20,7 +20,7 @@ spec:
         repoURL: 'https://github.com/lloydsmithjr03/gitops-environment-promotion'
         targetRevision: '{{head_sha}}'
         path: base
-      project: default
+      project: simple-env-kustomize
       syncPolicy:
         automated:
           prune: true
