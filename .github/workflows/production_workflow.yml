@@ -17,7 +17,7 @@ jobs:
           COMMIT_MESSAGE: 'chore: promote to production'
           COMMIT_NAME: 'GitHub Actions'
           COMMIT_EMAIL: 'smithl@nuarxinc.com'
-          PR_BRANCH_NAME: 'chore-promote-production-${github.event.pull_requeest.id}'
+          PR_BRANCH_NAME: 'chore-promote-production-${github.event.pull_request.id}'
           PR_TITLE: 'chore: promote staging to production'
           INCLUDE_LABELS: prod
       
