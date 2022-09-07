@@ -12,14 +12,12 @@ jobs:
         uses: technote-space/create-pr-action@v2
         with:
           EXECUTE_COMMANDS: |
-            pwd
-            ls
             cp envs/qa/version.yml envs/staging-us/version.yml
             cp envs/qa/version.yml envs/staging-eu/version.yml
           COMMIT_MESSAGE: 'chore: promote to staging'
           COMMIT_NAME: 'GitHub Actions'
           COMMIT_EMAIL: 'smithl@nuarxinc.com'
-          PR_BRANCH_NAME: 'chore-promote-staging-${PR_ID}'
+          PR_BRANCH_NAME: 'chore-promote-production-${github.event.pull_requeest.id}'
           PR_TITLE: 'chore: promote version to staging'
           INCLUDE_LABELS: staging
       
