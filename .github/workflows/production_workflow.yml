@@ -1,1 +1,22 @@
+on:
+  pull_request:
+    types:
+      - closed
 
+jobs:
+  if_merged:
+    if: github.event.pull_reqeuest.merged == true && github.event.label.name == 'staging'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create staging PR
+        uses: technote-space/create-pr-action@v2
+        with:
+          EXECUTE_COMMANDS: |
+            cp envs/staging-us/version.yml envs/prod-us/version.yml
+            cp envs/staging-eu/version.yml envs/prod-eu/version.yml
+          COMMIT_MESSAGE: 'chore: promote to production'
+          COMMIT_NAME: 'GitHub Actions'
+          COMMIT_EMAIL: 'smithl@nuarxinc.com'
+          PR_BRANCH_NAME: 'chore-promote-production-${PR_ID}'
+          PR_TITLE: 'chore: promote staging to production'
+      
