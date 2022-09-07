@@ -5,7 +5,7 @@ on:
 
 jobs:
   if_merged:
-    if: github.event.pull_reqeuest.merged == true && && contains( github.event.pull_request.labels.*.name, 'qa')
+    if: github.event.pull_reqeuest.merged == true && contains( github.event.pull_request.labels.*.name, 'qa')
     runs-on: ubuntu-latest
     steps:
       - name: Create staging PR
