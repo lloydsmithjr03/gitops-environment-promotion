@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Create staging PR
         uses: technote-space/create-pr-action@v2
-         with:
+        with:
            EXECUTE_COMMANDS: |
              cp envs/qa/version.yml envs/staging-us/version.yml
              cp envs/qa/version.yml envs/staging-eu/version.yml
