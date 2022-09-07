@@ -2,12 +2,9 @@ on:
   pull_request:
     types:
       - closed
-  label:
-    types:
-      - qa
 jobs:
   if_merged:
-    if: github.event.pull_reqeuest.merged == true
+    if: github.event.pull_reqeuest.merged == true && github.event.label.name == 'qa'
     runs-on: ubuntu-latest
     steps:
       - name: Create staging PR
