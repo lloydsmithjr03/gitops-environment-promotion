@@ -18,7 +18,7 @@ jobs:
         uses: peter-evans/create-pull-request@v4.1.1
         with:
           commit-message: 'promote: qa to staging'
-          title: 'promote: qa to staging'
+          title: 'promote: staging to production'
           body: |
             Promotes staging version to production
           labels: prod
