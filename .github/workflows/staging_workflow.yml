@@ -15,7 +15,7 @@ jobs:
           git fetch origin main:main
           git reset --hard main
       - name: Copy files
-      - run: |
+        run: |
           cp envs/qa/version.yml envs/staging-us/version.yml
           cp envs/qa/version.yml envs/staging-eu/version.yml
       - name: Create Pull Request
