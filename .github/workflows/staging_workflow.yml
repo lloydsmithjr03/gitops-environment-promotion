@@ -8,16 +8,21 @@ jobs:
     if: github.event.pull_request.merged == true && contains( github.event.pull_request.labels.*.name, 'qa')
     runs-on: ubuntu-latest
     steps:
-      - name: Create staging PR
-        uses: technote-space/create-pr-action@v2
+      - name: Checkout
+        uses: actions/checkout@v2.4.2
+      - name: Reset promotion branch
+        run: |
+          git fetch origin main:main
+          git reset --hard main
+      - name: Copy files
+      - run: |
+          cp envs/qa/version.yml envs/staging-us/version.yml
+          cp envs/qa/version.yml envs/staging-eu/version.yml
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v4.1.1
         with:
-          EXECUTE_COMMANDS: |
-            cp envs/qa/version.yml envs/staging-us/version.yml
-            cp envs/qa/version.yml envs/staging-eu/version.yml
-          COMMIT_MESSAGE: 'chore: promote to staging'
-          COMMIT_NAME: 'GitHub Actions'
-          COMMIT_EMAIL: 'smithl@nuarxinc.com'
-          PR_BRANCH_NAME: 'chore-promote-production-${github.event.pull_request.id}'
-          PR_TITLE: 'chore: promote version to staging'
-          INCLUDE_LABELS: staging
-      
+          commit-message: 'promote: qa to staging'
+          title: 'promote: qa to staging'
+          body: |
+            Promotes QA version to staging
+          labels: staging
