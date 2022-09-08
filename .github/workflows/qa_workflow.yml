@@ -20,4 +20,4 @@ jobs:
           title: 'promote: base to qa'
           body: |
             Promotes base version to QA
-          labels: staging
+          labels: qa
