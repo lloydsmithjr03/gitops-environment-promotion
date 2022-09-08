@@ -8,16 +8,18 @@ jobs:
     if: github.event.pull_request.merged == true && contains( github.event.pull_request.labels.*.name, 'staging')
     runs-on: ubuntu-latest
     steps:
-      - name: Create staging PR
-        uses: technote-space/create-pr-action@v2
+      - name: Checkout
+        uses: actions/checkout@v2.4.2
+      - name: Copy files
+        run: |
+          cp envs/staging-us/version.yml envs/prod-us/version.yml
+          cp envs/staging-eu/version.yml envs/prod-eu/version.yml
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v4.1.1
         with:
-          EXECUTE_COMMANDS: |
-            cp envs/staging-us/version.yml envs/prod-us/version.yml
-            cp envs/staging-eu/version.yml envs/prod-eu/version.yml
-          COMMIT_MESSAGE: 'chore: promote to production'
-          COMMIT_NAME: 'GitHub Actions'
-          COMMIT_EMAIL: 'smithl@nuarxinc.com'
-          PR_BRANCH_NAME: 'chore-promote-production-${github.event.pull_request.id}'
-          PR_TITLE: 'chore: promote staging to production'
-          INCLUDE_LABELS: prod
+          commit-message: 'promote: qa to staging'
+          title: 'promote: qa to staging'
+          body: |
+            Promotes staging version to production
+          labels: prod
       
