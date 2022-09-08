@@ -17,7 +17,7 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4.1.1
         with:
-          commit-message: 'promote: qa to staging'
+          commit-message: 'promote: staging to production'
           title: 'promote: staging to production'
           body: |
             Promotes staging version to production
