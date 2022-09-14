@@ -14,7 +14,7 @@ spec:
     repoURL: 'https://github.com/lloydsmithjr03/gitops-environment-promotion'
     path: envs/qa
     targetRevision: HEAD
-syncPolicy:
-  automated: {}
-  syncOptions:
-    - CreateNamespace=true
+  syncPolicy:
+    automated: {}
+    syncOptions:
+      - CreateNamespace=true
