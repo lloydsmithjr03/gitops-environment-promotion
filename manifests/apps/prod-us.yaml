@@ -1,12 +1,20 @@
-project: simple-env-kustomize
-source:
-  repoURL: 'https://github.com/lloydsmithjr03/gitops-environment-promotion'
-  path: envs/prod-us
-  targetRevision: HEAD
-destination:
-  server: 'https://kubernetes.default.svc'
-  namespace: prod-us
-syncPolicy:
-  automated: {}
-  syncOptions:
-    - CreateNamespace=true
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: prod-us-simple-env
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:  
+  project: simple-env-kustomize
+  source:
+    repoURL: 'https://github.com/lloydsmithjr03/gitops-environment-promotion'
+    path: envs/prod-us
+    targetRevision: HEAD
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: prod-us
+  syncPolicy:
+    automated: {}
+    syncOptions:
+      - CreateNamespace=true
