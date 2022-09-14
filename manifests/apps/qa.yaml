@@ -1,11 +1,19 @@
-project: simple-env-kustomize
-source:
-  repoURL: 'https://github.com/lloydsmithjr03/gitops-environment-promotion'
-  path: envs/qa
-  targetRevision: HEAD
-destination:
-  server: 'https://kubernetes.default.svc'
-  namespace: qa
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: qa-simple-env
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    name: 'in-cluster'
+    namespace: qa
+  project: simple-env-kustomize
+  source:
+    repoURL: 'https://github.com/lloydsmithjr03/gitops-environment-promotion'
+    path: envs/qa
+    targetRevision: HEAD
 syncPolicy:
   automated: {}
   syncOptions:
