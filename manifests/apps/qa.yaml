@@ -1,0 +1,12 @@
+project: simple-env-kustomize
+source:
+  repoURL: 'https://github.com/lloydsmithjr03/gitops-environment-promotion'
+  path: envs/qa
+  targetRevision: HEAD
+destination:
+  server: 'https://kubernetes.default.svc'
+  namespace: qa
+syncPolicy:
+  automated: {}
+  syncOptions:
+    - CreateNamespace=true

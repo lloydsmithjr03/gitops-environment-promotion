@@ -1,0 +1,12 @@
+project: simple-env-kustomize
+source:
+  repoURL: 'https://github.com/lloydsmithjr03/gitops-environment-promotion'
+  path: envs/staging-eu
+  targetRevision: HEAD
+destination:
+  server: 'https://kubernetes.default.svc'
+  namespace: staging-eu
+syncPolicy:
+  automated: {}
+  syncOptions:
+    - CreateNamespace=true
