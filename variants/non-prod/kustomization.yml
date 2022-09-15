@@ -3,4 +3,3 @@ kind: Component
 
 patchesStrategicMerge:
 - non-prod.yml
-- replicas.yml
