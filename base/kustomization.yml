@@ -8,3 +8,6 @@ resources:
 
 patchesStrategicMerge:
 - version.yml
+
+configurations:
+  - rollout-transform.yaml
