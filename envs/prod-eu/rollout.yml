@@ -3,7 +3,7 @@ kind: Rollout
 metadata:
   name: simple-deployment
 spec:
-  replicas: 5
+  replicas: 8
   selector:
     matchLabels:
       app: trivial-go-web-app
