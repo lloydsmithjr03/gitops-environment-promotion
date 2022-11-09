@@ -8,29 +8,21 @@ metadata:
   namespace: argocd
 spec:
   generators:
-    - matrix:
-        generators:
-          - git:
-              files:
-              - path: manifests/configuration/*config.json
-              repoURL: https://github.com/lloydsmithjr03/gitops-environment-promotion
-              requeueAfterSeconds: 20
-              revision: HEAD
-          - git:
-              repoURL: '{{ repo }}'
-              revision: HEAD
-              directories:
-                - path: envs/*
+    - git:
+        repoURL: https://github.com/lloydsmithjr03/gitops-environment-promotion
+        revision: HEAD
+        directories:
+          - path: envs/*
   template:
     metadata:
       labels:
         app.kubernetes.io/managed-by: argocd-autopilot
-        app.kubernetes.io/name: '{{ app }}'
-      name: core-platform-{{ app }}-{{ path.basename }}
+        app.kubernetes.io/name: 'core-platform'
+      name: core-platform-core-platform-{{ path.basename }}
       namespace: argocd
     spec:
       destination:
-        namespace: '{{ namespace }}'
+        namespace: default
         name: in-cluster
       ignoreDifferences:
       - group: argoproj.io
@@ -40,8 +32,8 @@ spec:
       project: core-platform
       source:
         path: '{{ path }}'
-        repoURL: '{{ repo }}'
-        targetRevision: '{{ targetRevision }}'
+        repoURL: https://github.com/lloydsmithjr03/gitops-environment-promotion
+        targetRevision: HEAD
       syncPolicy:
         automated:
           allowEmpty: true
