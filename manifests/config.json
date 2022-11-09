@@ -1,0 +1,6 @@
+{
+    "name": "simple-env",
+    "repo": "https://github.com/lloydsmithjr03/gitops-environment-promotion",
+    "namespace": "default",
+    "targetRevision": "HEAD"
+}

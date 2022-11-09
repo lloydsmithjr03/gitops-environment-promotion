@@ -1,0 +1,50 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+  creationTimestamp: null
+  name: core-platform
+  namespace: argocd
+spec:
+  generators:
+    - matrix:
+        generators:
+          - git:
+              files:
+              - path: manifests/apps/*config.json
+              repoURL: https://github.com/lloydsmithjr03/gitops-environment-promotion
+              requeueAfterSeconds: 20
+              revision: HEAD
+          - git:
+              repoURL: '{{ repo }}'
+              revision: HEAD
+              directories:
+                - path: envs/*
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/managed-by: argocd-autopilot
+        app.kubernetes.io/name: '{{ app }}'
+      name: core-platform-{{ app }}-{{ path.basename }}
+      namespace: argocd
+    spec:
+      destination:
+        namespace: '{{ namespace }}'
+        name: in-cluster
+      ignoreDifferences:
+      - group: argoproj.io
+        jsonPointers:
+        - /status
+        kind: Application
+      project: core-platform
+      source:
+        path: '{{ path }}'
+        repoURL: '{{ repo }}'
+        targetRevision: '{{ targetRevision }}'
+      syncPolicy:
+        automated:
+          allowEmpty: true
+          prune: true
+          selfHeal: true
+status: {}
