@@ -12,7 +12,7 @@ spec:
         generators:
           - git:
               files:
-              - path: manifests/applicationsets/*config.json
+              - path: manifests/configuration/*config.json
               repoURL: https://github.com/lloydsmithjr03/gitops-environment-promotion
               requeueAfterSeconds: 20
               revision: HEAD
