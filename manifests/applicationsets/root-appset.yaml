@@ -29,7 +29,7 @@ spec:
         jsonPointers:
         - /status
         kind: Application
-      project: core-platform
+      project: default
       source:
         path: '{{ path }}'
         repoURL: https://github.com/lloydsmithjr03/gitops-environment-promotion
